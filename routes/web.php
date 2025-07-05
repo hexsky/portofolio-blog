@@ -11,6 +11,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/portofolio', [PortfolioController::class, 'indexPublic'])->name('portfolio.public');
 Route::get('/blog', [PostController::class, 'indexPublic'])->name('blog.public');
 Route::get('/blog/{post:slug}', [PostController::class, 'showPublic'])->name('blog.show');
+Route::view('/tentang', 'tentang')->name('about');
 
 // Halaman Dashboard Utama
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');

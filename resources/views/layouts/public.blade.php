@@ -4,19 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="icon" href="{{ asset(path: 'favicon.svg') }}" type="image/svg+xml">
+    <title>Web Portofolio</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 
     <!-- Scripts and Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Skrip untuk Dark Mode (Strategi Class) -->
     <script>
-        // Skrip ini diletakkan di head untuk menghindari FOUC (Flash of Unstyled Content)
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -31,22 +30,28 @@
     {{-- Navbar --}}
     <nav class="bg-white dark:bg-gray-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <a href="/"
-                            class="text-xl font-bold text-gray-800 dark:text-gray-200">{{ config('app.name', 'Laravel') }}</a>
-                    </div>
+            {{-- PERUBAHAN: Menggunakan Grid untuk layout yang lebih seimbang --}}
+            <div class="grid grid-cols-3 h-16 items-center">
+
+                <!-- Kiri: Rata Kiri -->
+                <div class="justify-self-start">
+                    <a href="/" class="text-xl font-bold text-gray-800 dark:text-gray-200">Web Portofolio</a>
                 </div>
-                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+
+                <!-- Tengah: Rata Tengah -->
+                <div class="hidden sm:flex justify-self-center space-x-8">
                     <a href="/"
                         class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->is('/') ? 'border-indigo-500' : 'border-transparent' }} text-sm font-medium leading-5 text-gray-900 dark:text-gray-100">Home</a>
                     <a href="{{ route('portfolio.public') }}"
                         class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('portfolio.public') ? 'border-indigo-500' : 'border-transparent' }} text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Portofolio</a>
                     <a href="{{ route('blog.public') }}"
-                        class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('blog.public') ? 'border-indigo-500' : 'border-transparent' }} text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Blog</a>
+                        class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('blog.public') ? 'border-indigo-500' : 'border-transparent' }} text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-300">Blog</a>
+                    <a href="{{ route('about') }}"
+                        class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('about') ? 'border-indigo-500' : 'border-transparent' }} text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Tentang</a>
                 </div>
-                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+
+                <!-- Kanan: Rata Kanan -->
+                <div class="hidden sm:flex justify-self-end items-center">
                     <!-- Tombol Theme Switcher -->
                     <button id="theme-toggle" type="button"
                         class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
@@ -68,10 +73,6 @@
                         @else
                             <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-300 underline">Log
                                 in</a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
-                                    class="ml-4 text-sm text-gray-700 dark:text-gray-300 underline">Register</a>
-                            @endif
                         @endauth
                     </div>
                 </div>

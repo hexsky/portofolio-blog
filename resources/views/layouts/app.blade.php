@@ -85,5 +85,18 @@
                 });
             }
         </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const successAlert = document.getElementById('success-alert');
+                if (successAlert) {
+                    setTimeout(() => {
+                        successAlert.style.transition = 'opacity 0.5s ease';
+                        successAlert.style.opacity = '0';
+                        setTimeout(() => successAlert.style.display = 'none', 500); // Tunggu transisi selesai
+                    }, 3000); // Waktu dalam milidetik (3000ms = 3 detik)
+                }
+            });
+        </script>
     </body>
 </html>

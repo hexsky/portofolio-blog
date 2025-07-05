@@ -1,32 +1,38 @@
 @extends('layouts.public')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-10 mx-auto">
-            <article>
-                {{-- Header Artikel --}}
-                <header class="mb-4">
-                    <h1 class="fw-bolder mb-1 display-5">{{ $post->title }}</h1>
-                    <div class="text-muted fst-italic mb-2">
-                        Diposting pada {{ $post->created_at->format('d F Y') }} oleh {{ $post->user->name }}
-                    </div>
-                </header>
+    <div class="max-w-4xl mx-auto">
+        <article class="bg-white rounded-lg shadow-md p-6 md:p-8">
+            {{-- Header Artikel --}}
+            <header class="mb-6">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">{{ $post->title }}</h1>
+                <p class="text-gray-500 text-sm">
+                    Diposting pada {{ $post->created_at->format('d F Y') }} oleh <span class="font-semibold">{{ $post->user->name }}</span>
+                </p>
+            </header>
 
-                {{-- Gambar Utama --}}
-                @if($post->image)
-                    <figure class="mb-4">
-                        <img class="img-fluid rounded" src="{{ asset('images/posts/'.$post->image) }}" alt="{{ $post->title }}" />
-                    </figure>
-                @endif
-                
-                {{-- Isi Konten --}}
-                <section class="mb-5 fs-5">
-                    {{-- Gunakan {!! !!} untuk merender HTML jika konten Anda menggunakan editor WYSIWYG --}}
-                    {!! nl2br(e($post->content)) !!}
-                </section>
-            </article>
+            {{-- Gambar Utama --}}
+            @if($post->image)
+                <figure class="mb-6">
+                    <img class="w-full h-auto rounded-lg" src="{{ asset('images/posts/'.$post->image) }}" alt="{{ $post->title }}" />
+                </figure>
+            @endif
+            
+            {{-- Isi Konten --}}
+            {{-- `prose` dari Tailwind akan memberikan styling default yang bagus untuk teks --}}
+            <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+                {!! nl2br(e($post->content)) !!}
+            </div>
+        </article>
 
-            <a href="{{ route('blog.public') }}" class="btn btn-outline-dark">← Kembali ke Blog</a>
+        {{-- Tombol Kembali --}}
+        <div class="mt-8">
+            <a href="{{ route('blog.public') }}" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                Kembali ke Semua Postingan
+            </a>
         </div>
     </div>
 @endsection

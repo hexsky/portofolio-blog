@@ -8,55 +8,50 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Scripts and Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-light">
+<body class="font-sans antialiased bg-gray-100 text-gray-800">
 
     {{-- Navbar --}}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                {{ config('app.name', 'Laravel') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('portfolio.public') ? 'active' : '' }}" href="{{ route('portfolio.public') }}">Portofolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('blog.public') ? 'active' : '' }}" href="{{ route('blog.public') }}">Blog</a>
-                    </li>
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="/" class="text-xl font-bold text-gray-800">{{ config('app.name', 'Laravel') }}</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="/" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->is('/') ? 'border-indigo-500' : 'border-transparent' }} text-sm font-medium leading-5 text-gray-900">Home</a>
+                    <a href="{{ route('portfolio.public') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('portfolio.public') ? 'border-indigo-500' : 'border-transparent' }} text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300">Portofolio</a>
+                    <a href="{{ route('blog.public') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('blog.public') ? 'border-indigo-500' : 'border-transparent' }} text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300">Blog</a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
                     @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
-                        </li>
+                        <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
-                        </li>
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                        @endif
                     @endauth
-                </ul>
+                </div>
             </div>
         </div>
     </nav>
 
     {{-- Konten Halaman --}}
-    <main class="container my-5">
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         @yield('content')
     </main>
 
     {{-- Footer --}}
-    <footer class="bg-dark text-white text-center p-3 mt-5">
-        <p class="mb-0">&copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All Rights Reserved.</p>
+    <footer class="bg-white mt-12">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+            &copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All Rights Reserved.
+        </div>
     </footer>
 
 </body>

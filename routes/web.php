@@ -2,12 +2,13 @@
 
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Publik
-Route::get('/', function () {
-    return view('welcome'); }); // Nanti diubah jadi controller
+Route::get('/', [HomeController::class, 'index'])->name('home');
+// Nanti diubah jadi controller
 Route::get('/portofolio', [PortfolioController::class, 'indexPublic'])->name('portfolio.public');
 Route::get('/blog', [PostController::class, 'indexPublic'])->name('blog.public');
 Route::get('/blog/{post:slug}', [PostController::class, 'showPublic'])->name('blog.show');

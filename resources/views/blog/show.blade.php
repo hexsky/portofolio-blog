@@ -19,7 +19,6 @@
             @endif
             
             {{-- Isi Konten --}}
-            {{-- `prose dark:prose-invert` dari Tailwind akan memberikan styling default yang bagus untuk teks --}}
             <div class="prose prose-lg dark:prose-invert max-w-none leading-relaxed">
                 {!! nl2br(e($post->content)) !!}
             </div>

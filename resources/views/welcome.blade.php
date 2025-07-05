@@ -12,12 +12,11 @@
         </div>
     </div>
 
-    {{-- Bagian Portofolio Terbaru --}}
+    {{-- Bagian Portofolio --}}
     <section class="mb-12">
         <h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-gray-100">Portofolio Terbaru</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @forelse ($portfolios as $portfolio)
-                {{-- PERUBAHAN: Memastikan kartu dan isinya memiliki style dark mode --}}
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300">
                     <img src="{{ asset('images/portfolios/'.$portfolio->image) }}" alt="{{ $portfolio->title }}" class="w-full h-48 object-cover">
                     <div class="p-6">
@@ -32,12 +31,11 @@
         </div>
     </section>
 
-    {{-- Bagian Blog Terbaru --}}
+    {{-- Bagian Blog --}}
     <section>
         <h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-gray-100">Tulisan Terbaru</h2>
         <div class="space-y-6 max-w-4xl mx-auto">
             @forelse ($posts as $post)
-                {{-- PERUBAHAN: Memastikan kartu dan isinya memiliki style dark mode --}}
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">{{ $post->title }}</h3>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Oleh {{ $post->user->name }} pada {{ $post->created_at->format('d F Y') }}</p>

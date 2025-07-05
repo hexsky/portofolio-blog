@@ -43,7 +43,6 @@
             </main>
         </div>
 
-        <!-- PERUBAHAN: Menambahkan Skrip Logika untuk Tombol Theme Switcher -->
         <script>
             var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
             var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');

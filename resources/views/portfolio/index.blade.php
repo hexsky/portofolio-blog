@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="text-center mb-12">
-        {{-- PERUBAHAN: Menambahkan text-gray-900 dan dark:text-gray-100 --}}
         <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-gray-100">Portofolio Saya</h1>
         <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">Berikut adalah beberapa karya yang pernah saya buat.</p>
     </div>

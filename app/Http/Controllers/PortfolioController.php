@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Portfolio; // <-- Jangan lupa import model Portfolio
+use App\Models\Portfolio; 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File; // <-- Import untuk mengelola file
+use Illuminate\Support\Facades\File;
 
 class PortfolioController extends Controller
 {

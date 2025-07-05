@@ -10,7 +10,6 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
             <!-- Foto Profil -->
             <div class="md:col-span-1 flex justify-center">
-                {{-- Ganti 'images/profile.jpg' dengan path foto Anda di folder public --}}
                 <img src="{{ asset('images/profile.jpg') }}" alt="Foto Profil Achmad Fitto R." class="rounded-full h-48 w-48 md:h-64 md:w-64 object-cover shadow-lg">
             </div>
 
@@ -30,7 +29,6 @@
         <div class="mt-16">
             <h3 class="text-2xl font-bold text-center text-gray-900 dark:text-gray-100 mb-8">Keahlian Utama</h3>
             <div class="flex flex-wrap justify-center gap-4">
-                {{-- Ganti dengan keahlian Anda --}}
                 <span class="bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300 text-sm font-semibold px-4 py-2 rounded-full">Laravel</span>
                 <span class="bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-300 text-sm font-semibold px-4 py-2 rounded-full">Tailwind CSS</span>
                 <span class="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300 text-sm font-semibold px-4 py-2 rounded-full">JavaScript</span>

@@ -1,17 +1,20 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
-// Nanti diubah jadi controller
 Route::get('/portofolio', [PortfolioController::class, 'indexPublic'])->name('portfolio.public');
 Route::get('/blog', [PostController::class, 'indexPublic'])->name('blog.public');
 Route::get('/blog/{post:slug}', [PostController::class, 'showPublic'])->name('blog.show');
+
+// Halaman Dashboard Utama
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+
 
 // Halaman Admin yang dilindungi Auth
 Route::middleware('auth')->group(function () {

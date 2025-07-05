@@ -13,10 +13,21 @@ class HomeController extends Controller
         // Ambil 3 item portofolio terbaru
         $portfolios = Portfolio::latest()->take(3)->get();
 
-        // Ambil 3 postingan blog terbaru
+        // Ambil 3 postingan blog terbaru BESERTA data penulisnya (Eager Loading)
         $posts = Post::with('user')->latest()->take(3)->get();
-        
+
         // Kirim data ke view 'welcome'
         return view('welcome', compact('portfolios', 'posts'));
+    }
+
+    /**
+     * Menampilkan dashboard admin dengan data statistik.
+     */
+    public function dashboard()
+    {
+        $portfolioCount = Portfolio::count();
+        $postCount = Post::count();
+
+        return view('dashboard', compact('portfolioCount', 'postCount'));
     }
 }

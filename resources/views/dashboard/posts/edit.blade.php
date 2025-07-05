@@ -1,51 +1,48 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Edit Postingan') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-
-                    <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                         @csrf
                         @method('PUT')
 
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Judul Postingan</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $post->title) }}" required>
-                            @error('title')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        <!-- Judul -->
+                        <div>
+                            <x-input-label for="title" :value="__('Judul Postingan')" />
+                            <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" :value="old('title', $post->title)" required autofocus />
+                            <x-input-error class="mt-2" :messages="$errors->get('title')" />
                         </div>
 
-                        <div class="mb-3">
-                            <label for="content" class="form-label">Isi Konten</label>
-                            <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="10" required>{{ old('content', $post->content) }}</textarea>
-                            @error('content')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        <!-- Konten -->
+                        <div>
+                            <x-input-label for="content" :value="__('Isi Konten')" />
+                            <textarea id="content" name="content" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full" rows="10" required>{{ old('content', $post->content) }}</textarea>
+                            <x-input-error class="mt-2" :messages="$errors->get('content')" />
                         </div>
 
-                        <div class="mb-3">
-                            <label for="image" class="form-label">Gambar Utama (Opsional)</label>
-                            <p class="text-muted small">Kosongkan jika tidak ingin mengubah gambar.</p>
+                        <!-- Gambar -->
+                        <div>
+                            <x-input-label for="image" :value="__('Gambar Utama (Opsional)')" />
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Kosongkan jika tidak ingin mengubah gambar.</p>
                             @if($post->image)
-                                <img src="{{ asset('images/posts/'.$post->image) }}" class="img-thumbnail mb-2" style="width: 200px;">
+                                <img src="{{ asset('images/posts/'.$post->image) }}" class="mt-2 rounded-md h-24 w-auto" alt="Gambar saat ini">
                             @endif
-                            <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
-                            @error('image')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <input id="image" name="image" type="file" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                            <x-input-error class="mt-2" :messages="$errors->get('image')" />
                         </div>
 
-                        <a href="{{ route('posts.index') }}" class="btn btn-secondary">Batal</a>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <div class="flex items-center gap-4">
+                            <x-primary-button>{{ __('Update') }}</x-primary-button>
+                            <a href="{{ route('posts.index') }}" class="text-gray-600 dark:text-gray-400 hover:underline">Batal</a>
+                        </div>
                     </form>
-
                 </div>
             </div>
         </div>

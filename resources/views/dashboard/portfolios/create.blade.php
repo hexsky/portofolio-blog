@@ -1,74 +1,50 @@
 <x-app-layout>
-    {{-- Header Halaman --}}
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Tambah Item Portofolio Baru') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <form action="{{ route('portfolios.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                        @csrf
 
-                    {{-- Formulir --}}
-                    {{-- enctype="multipart/form-data" penting untuk upload file --}}
-                    <form action="{{ route('portfolios.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf {{-- Token keamanan Laravel --}}
-
-                        {{-- Input Judul --}}
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Judul</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" required>
-                            {{-- Pesan Error untuk Judul --}}
-                            @error('title')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <!-- Judul -->
+                        <div>
+                            <x-input-label for="title" :value="__('Judul')" />
+                            <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" :value="old('title')" required autofocus />
+                            <x-input-error class="mt-2" :messages="$errors->get('title')" />
                         </div>
 
-                        {{-- Input Kategori --}}
-                        <div class="mb-3">
-                            <label for="category" class="form-label">Kategori</label>
-                            <input type="text" class="form-control @error('category') is-invalid @enderror" id="category" name="category" value="{{ old('category') }}" required>
-                            {{-- Pesan Error untuk Kategori --}}
-                            @error('category')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <!-- Kategori -->
+                        <div>
+                            <x-input-label for="category" :value="__('Kategori')" />
+                            <x-text-input id="category" name="category" type="text" class="mt-1 block w-full" :value="old('category')" required />
+                            <x-input-error class="mt-2" :messages="$errors->get('category')" />
                         </div>
 
-                        {{-- Input Deskripsi --}}
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Deskripsi</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="5" required>{{ old('description') }}</textarea>
-                            {{-- Pesan Error untuk Deskripsi --}}
-                            @error('description')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <!-- Deskripsi -->
+                        <div>
+                            <x-input-label for="description" :value="__('Deskripsi')" />
+                            <textarea id="description" name="description" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full" rows="5" required>{{ old('description') }}</textarea>
+                            <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
 
-                        {{-- Input Gambar --}}
-                        <div class="mb-3">
-                            <label for="image" class="form-label">Gambar</label>
-                            <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" required>
-                            {{-- Pesan Error untuk Gambar --}}
-                            @error('image')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <!-- Gambar -->
+                        <div>
+                            <x-input-label for="image" :value="__('Gambar')" />
+                            <input id="image" name="image" type="file" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" required>
+                            <x-input-error class="mt-2" :messages="$errors->get('image')" />
                         </div>
 
-                        {{-- Tombol Aksi --}}
-                        <a href="{{ route('portfolios.index') }}" class="btn btn-secondary">Batal</a>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <div class="flex items-center gap-4">
+                            <x-primary-button>{{ __('Simpan') }}</x-primary-button>
+                            <a href="{{ route('portfolios.index') }}" class="text-gray-600 dark:text-gray-400 hover:underline">Batal</a>
+                        </div>
                     </form>
-
                 </div>
             </div>
         </div>

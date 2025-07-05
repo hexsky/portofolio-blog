@@ -12,7 +12,12 @@
     <!-- Scripts and Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-gray-100 text-gray-800">
+{{-- 
+    PERUBAHAN:
+    1. Menambahkan "flex flex-col" untuk mengaktifkan layout flexbox secara vertikal.
+    2. Menambahkan "min-h-screen" untuk memastikan body memiliki tinggi minimal setinggi layar.
+--}}
+<body class="font-sans antialiased bg-gray-100 text-gray-800 flex flex-col min-h-screen">
 
     {{-- Navbar --}}
     <nav class="bg-white shadow-md">
@@ -42,15 +47,19 @@
         </div>
     </nav>
 
-    {{-- Konten Halaman --}}
-    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    {{-- 
+        PERUBAHAN:
+        Menambahkan "flex-grow" agar elemen main ini mengambil semua ruang kosong yang tersedia,
+        sehingga mendorong footer ke bawah.
+    --}}
+    <main class="flex-grow max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 w-full">
         @yield('content')
     </main>
 
     {{-- Footer --}}
-    <footer class="bg-white mt-12">
+    <footer class="bg-white mt-auto">
         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
-            &copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All Rights Reserved.
+            &copy; {{ date('Y') }} Praktikum Pemrograman Web. Achmad Fitto R.
         </div>
     </footer>
 

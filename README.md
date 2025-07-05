@@ -2,7 +2,7 @@
 
 Sebuah proyek website dinamis yang dibangun menggunakan Laravel 11 untuk memenuhi tugas Responsi Pemrograman Web. Website ini berfungsi sebagai portofolio pribadi untuk menampilkan karya dan sebagai platform blog untuk berbagi tulisan, dilengkapi dengan panel admin untuk manajemen konten.
 
-*![][image1]*
+![Screenshot Halaman Utama](./docs/images/screenshot-homepage.png)
 
 ## **Fitur Utama**
 
